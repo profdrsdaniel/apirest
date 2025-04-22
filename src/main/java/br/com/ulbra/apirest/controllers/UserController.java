@@ -1,7 +1,10 @@
 package br.com.ulbra.apirest.controllers;
 
-import br.com.ulbra.apirest.models.User;
+import br.com.ulbra.apirest.dto.UserDTO;
+import br.com.ulbra.apirest.entities.User;
 import br.com.ulbra.apirest.services.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,8 +22,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok(this.userService.getUsers());
+    public ResponseEntity<Page<UserDTO>> getUsers(Pageable pageable) {
+        return ResponseEntity.ok(this.userService.getUsers(pageable));
     }
 
     @GetMapping("/{id}")
